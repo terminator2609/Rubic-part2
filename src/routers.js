@@ -9,6 +9,10 @@ router.use(homeController)
 router.use("/cube/create", addCubeController)
 
 
+router.use("/rubicApp/about", (req, res) => {
+    res.render("about")
+})
+
 router.use("*", (req, res) => {
     res.render("404")
 })
