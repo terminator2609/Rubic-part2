@@ -9,7 +9,7 @@ router.use(homeController)
 router.use("/cube/create", addCubeController)
 
 
-router.use("/rubicApp/about", (req, res) => {
+router.get("/rubicApp/about", (req, res) => {
     res.render("about")
 })
 
