@@ -1,22 +1,12 @@
 const express = require("express")
 const newCube = require("../models/newCube")
+const allMethods = require("../services/homePageService")
 
 const router = express.Router()
 
-let getHomePage = (req, res) => {
-    let getAllCubes = {}
-    newCube.find({})
-        .then((values) => {
-            values.forEach((a) => {
-                getAllCubes[a.id] = {
-                    id: a.id,
-                    name: a.name,
-                    description: a.description,
-                    imageUrl: a.imageUrl,
-                    difficultyLevel: a.difficultyLevel
-                }
-            })
-        })
+let getHomePage = async (req, res) => {
+    // let getAllCubes = {}
+    let getAllCubes = await allMethods.getCubesfromDb()
 
     res.render("index", {
         getAllCubes
