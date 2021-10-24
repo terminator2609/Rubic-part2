@@ -11,7 +11,6 @@ const getAttachAccessoryPage = (req, res) => {
             res.render("accessories/attachAccessory", {
                 name: values.name,
                 imageUrl: values.imageUrl,
-                description: values.description
             })
         })
         .catch((error) => {
