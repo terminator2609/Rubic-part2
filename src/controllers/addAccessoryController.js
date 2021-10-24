@@ -1,4 +1,4 @@
-const newAccessory = require("../models/accessory")
+const addNewAccessoryService = require("../services/addAccessoryService")
 const express = require("express")
 
 const router = express.Router()
@@ -7,19 +7,14 @@ const getAddAccessoryPage = (req, res) => {
     res.render("accessories/createAccessory")
 }
 
-const addNewAccessory = (req, res) => {
-    newAccessory.create({
-        name: req.body.name,
-        description: req.body.description,
-        imageUrl: req.body.imageUrl
-    })
-    .catch((error) => {
-        if(error) {
-            res.send(error.errors.imageUrl.message).end()
-        } else {
-             res.redirect("/")
-        }
-     })
+const addNewAccessory = async (req, res) => {
+
+    try {
+        await addNewAccessoryService.addNewAccessoryToDb(req, res)
+        res.redirect("/")
+    } catch (error) {
+        res.send(error.errors.imageUrl.message).end()
+    }
 }
 
 router.get("/accessory", getAddAccessoryPage)

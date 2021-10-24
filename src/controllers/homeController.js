@@ -1,5 +1,4 @@
 const express = require("express")
-const newCube = require("../models/newCube")
 const allMethods = require("../services/homePageService")
 
 const router = express.Router()

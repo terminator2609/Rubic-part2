@@ -1,5 +1,4 @@
 const express = require("express")
-const newCube = require("../models/newCube")
 const addCubeService = require("../services/addCubeService")
 
 const router = express.Router()
