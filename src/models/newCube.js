@@ -13,13 +13,19 @@ const newCubeModel = new mongoose.Schema({
     imageUrl: {
         type: String,
         required: true,
+        validate: [/^https$:\/\//i, "Invalid image URL.Image URL must start with ,,https:"]
     },
     difficultyLevel: {
         type: Number,
         required: true,
         min: 1,
         max: 6
-    } 
+    },
+
+    accessories: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "addAccessory"
+    }
 })
 
 const newCube = mongoose.model("new-Cube", newCubeModel)

@@ -14,7 +14,13 @@ const postDataToDb = (req, res) => {
         imageUrl: req.body.imageUrl,
         difficultyLevel: req.body.difficultyLevel
     })
-    res.redirect("/")
+    .catch((error) => {
+       if(error) {
+           res.send(error.errors.imageUrl.message).end()
+       } else {
+            res.redirect("/")
+       }
+    })
 }
 
 router.get("/newCube", getAddCubePage)
