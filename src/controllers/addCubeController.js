@@ -1,5 +1,6 @@
 const express = require("express")
 const newCube = require("../models/newCube")
+const addCubeService = require("../services/addCubeService")
 
 const router = express.Router()
 
@@ -7,20 +8,14 @@ const getAddCubePage = (req, res) => {
     res.render("create")
 }
 
-const postDataToDb = (req, res) => {
-    newCube.create({
-        name: req.body.name,
-        description: req.body.description,
-        imageUrl: req.body.imageUrl,
-        difficultyLevel: req.body.difficultyLevel
-    })
-    .catch((error) => {
-       if(error) {
-           res.send(error.errors.imageUrl.message).end()
-       } else {
-            res.redirect("/")
-       }
-    })
+const postDataToDb = async (req, res) => {
+
+    try {
+        await addCubeService.addNewCubeToDB(req, res)
+        res.redirect("/")
+    } catch (error) {
+        res.send(error.errors.imageUrl.message).end()
+    }
 }
 
 router.get("/newCube", getAddCubePage)
