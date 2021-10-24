@@ -20,8 +20,6 @@ const addNewAccessory = (req, res) => {
              res.redirect("/")
         }
      })
-
-    res.redirect("/")
 }
 
 router.get("/accessory", getAddAccessoryPage)
