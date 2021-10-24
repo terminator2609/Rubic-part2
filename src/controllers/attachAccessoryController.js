@@ -1,9 +1,23 @@
 const express = require("express")
+const newCube = require("../models/newCube")
 
 const router = express.Router()
 
 const getAttachAccessoryPage = (req, res) => {
-    res.render("accessories/attachAccessory")
+    newCube.findById(req.params.id)
+        .then((values) => {
+
+
+            res.render("accessories/attachAccessory", {
+                name: values.name,
+                imageUrl: values.imageUrl,
+                description: values.description
+            })
+        })
+        .catch((error) => {
+            console.log(error)
+        })
+
 }
 
 router.get("/:id", getAttachAccessoryPage)
