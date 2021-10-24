@@ -4,7 +4,7 @@ const express = require("express")
 const router = express.Router()
 
 const getAddAccessoryPage = (req, res) => {
-    res.render("createAccessory")
+    res.render("accessories/createAccessory")
 }
 
 const addNewAccessory = (req, res) => {
@@ -13,6 +13,13 @@ const addNewAccessory = (req, res) => {
         description: req.body.description,
         imageUrl: req.body.imageUrl
     })
+    .catch((error) => {
+        if(error) {
+            res.send(error.errors.imageUrl.message).end()
+        } else {
+             res.redirect("/")
+        }
+     })
 
     res.redirect("/")
 }

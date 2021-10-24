@@ -8,7 +8,8 @@ const newAccessory = new mongoose.Schema({
 
     imageUrl: {
         type: String,
-        required: true
+        required: true,
+        validate: [/^https$:\/\//i, "Invalid image URL.Image URL must start with ,,https:"]
     },
 
     description: {
