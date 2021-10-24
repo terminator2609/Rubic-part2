@@ -1,5 +1,7 @@
 const newAccessory = require("../models/accessory")
 
+const getAllAcc = () => newAccessory.find({}).lean()
+
 async function addNewAccessoryToDb (req, res) {
     return newAccessory.create({
         name: req.body.name,
@@ -9,7 +11,8 @@ async function addNewAccessoryToDb (req, res) {
 }
 
 const allCommand = {
-    addNewAccessoryToDb
+    addNewAccessoryToDb,
+    getAllAcc
 }
 
 module.exports = allCommand

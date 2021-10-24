@@ -1,5 +1,7 @@
 const newCube = require("../models/newCube")
 
+const getCubeById = (id) => newCube.findById(id).lean()
+
 async function addNewCubeToDB (req, res) {
     return newCube.create({
         name: req.body.name,
@@ -10,7 +12,8 @@ async function addNewCubeToDB (req, res) {
 }
 
 const allCommand = {
-    addNewCubeToDB
+    addNewCubeToDB,
+    getCubeById
 }
 
 module.exports = allCommand

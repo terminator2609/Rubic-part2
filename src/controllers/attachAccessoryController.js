@@ -1,20 +1,27 @@
 const express = require("express")
-const newCube = require("../models/newCube")
+const allCommandCube = require("../services/addCubeService")
+const allCommandAcc = require("../services/addAccessoryService")
 
 const router = express.Router()
 
-const getAttachAccessoryPage = (req, res) => {
-    newCube.findById(req.params.id)
-        .then((values) => {
-            res.render("accessories/attachAccessory", {
-                name: values.name,
-                imageUrl: values.imageUrl,
+const getAttachAccessoryPage = async (req, res) => {
 
-            })
-        })
-        .catch((error) => {
-            console.log(error)
-        })
+    const cube = await allCommandCube.getCubeById(req.params.id)
+    const accessories = await allCommandAcc.getAllAcc()
+
+    res.render("accessories/attachAccessory", {cube, accessories})
+
+    // newCube.findById(req.params.id)
+    //     .then((values) => {
+    //         res.render("accessories/attachAccessory", {
+    //             name: values.name,
+    //             imageUrl: values.imageUrl,
+
+    //         })
+    //     })
+    //     .catch((error) => {
+    //         console.log(error)
+    //     })
 
 }
 

@@ -13,7 +13,7 @@ const addNewAccessory = async (req, res) => {
         await addNewAccessoryService.addNewAccessoryToDb(req, res)
         res.redirect("/")
     } catch (error) {
-        res.send(error.errors.imageUrl.message).end()
+        res.send(errors.imageUrl.message).end()
     }
 }
 
