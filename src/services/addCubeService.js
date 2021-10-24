@@ -1,4 +1,5 @@
 const newCube = require("../models/newCube")
+const newAccessory = require("../models/accessory")
 
 const getCubeById = (id) => newCube.findById(id).lean()
 
@@ -11,9 +12,19 @@ async function addNewCubeToDB (req, res) {
     })
 }
 
+async function attachAccessory(cubeId, accessoryId) {
+    const cube = await newCube.findById(cubeId)
+    const accessory = await newAccessory.findById(accessoryId)
+
+    cube.accessories.push(accessory)
+
+    cube.save()
+}
+
 const allCommand = {
     addNewCubeToDB,
-    getCubeById
+    getCubeById,
+    attachAccessory
 }
 
 module.exports = allCommand

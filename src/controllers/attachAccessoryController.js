@@ -10,22 +10,19 @@ const getAttachAccessoryPage = async (req, res) => {
     const accessories = await allCommandAcc.getAllAcc()
 
     res.render("accessories/attachAccessory", {cube, accessories})
+}
 
-    // newCube.findById(req.params.id)
-    //     .then((values) => {
-    //         res.render("accessories/attachAccessory", {
-    //             name: values.name,
-    //             imageUrl: values.imageUrl,
+const attachAccToCube = async (req, res) => {
+    const cubeId = req.params.id
 
-    //         })
-    //     })
-    //     .catch((error) => {
-    //         console.log(error)
-    //     })
+    await allCommandCube.attachAccessory(cubeId, req.body.accessory)
 
+    res.redirect("/")
 }
 
 router.get("/:id", getAttachAccessoryPage)
+router.post("/:id", attachAccToCube)
+
 
 module.exports = router
 
