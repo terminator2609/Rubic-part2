@@ -5,7 +5,7 @@ const allCommand = require("../services/detailsService")
 const getDetailsPage = async (req, res) => {
    let cube = await allCommand.getDetaisForCube(req.params.id)
 
-   let listOfAccessory = Object.values(await allCommand.getAccessories(req.params.id))[6]
+   let listOfAccessory = Object.values(await allCommand.getAccessories(req.params.id))[5]
 
    res.render("details", {
       cube,
