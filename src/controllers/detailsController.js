@@ -1,17 +1,27 @@
 const express = require("express")
-const cube = require("../models/newCube")
 const router = express.Router()
+const allCommand = require("../services/detailsService")
 
-router.get("/:id", (req, res) => {
-    cube.findById(req.params.id)
-        .then((values) => {
-            res.render("details", {
-                name: values.name,
-                description: values.description,
-                imageUrl: values.imageUrl,
-                difficultyLevel: values.difficultyLevel
+const getDetailsPage = async (req, res) => {
+   let cube = await allCommand.getDetaisForCube(req.params.id)
+   let accessories = cube.accessories
+   let listOfAccessory = []
+
+   if (accessories) {
+      accessories.forEach((value) => {
+         allCommand.getAccessories(value)
+            .then((accessory) => {
+               listOfAccessory.push(accessory)
             })
-        })
-})
+      })
+   }
+
+   res.render("details", {
+      cube,
+      listOfAccessory
+   })
+}
+
+router.get("/:id", getDetailsPage)
 
 module.exports = router
