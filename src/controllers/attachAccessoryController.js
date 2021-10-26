@@ -7,7 +7,19 @@ const router = express.Router()
 const getAttachAccessoryPage = async (req, res) => {
 
     const cube = await allCommandCube.getCubeById(req.params.id)
-    const accessories = await allCommandAcc.getAllAcc()
+    let accessories = await allCommandAcc.getAllAcc()
+
+    let test = accessories.slice()
+
+    accessories.forEach((a, i) => {
+        a.cubes.forEach((b) => {
+            if(b == req.params.id) {
+                test.splice(test.indexOf(a) , 1)
+            }
+        })
+    })
+
+    accessories = test
 
     res.render("accessories/attachAccessory", {cube, accessories})
 }

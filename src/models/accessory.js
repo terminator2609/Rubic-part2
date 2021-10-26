@@ -18,10 +18,10 @@ const newAccessory = new mongoose.Schema({
         maxlength: 500
     },
 
-    cubes: {
+    cubes: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: "newCube"
-    }
+        ref: "new-Cube"
+    }]
 })
 
 const addAccessory = mongoose.model("accessories", newAccessory)

@@ -17,8 +17,10 @@ async function attachAccessory(cubeId, accessoryId) {
     const accessory = await newAccessory.findById(accessoryId)
 
     cube.accessories.push(accessory)
+    accessory.cubes.push(cube)
 
     cube.save()
+    accessory.save()
 }
 
 const allCommand = {
