@@ -6,6 +6,9 @@ const addAccessoryController = require("./controllers/addAccessoryController")
 const detailsController = require("./controllers/detailsController")
 const attachAccessoryController = require("./controllers/attachAccessoryController")
 
+// auth //
+const addRegisterController = require("./controllers/auth/addRegisterController")
+
 
 const router = express.Router()
 
@@ -14,7 +17,7 @@ router.use("/cube/create", addCubeController)
 router.use("/cube/details", detailsController)
 router.use("/cube/attach/accessory", attachAccessoryController)
 router.use("/cubes/create", addAccessoryController)
-
+router.use("/user", addRegisterController)
 
 
 router.get("/rubicApp/about", (req, res) => {
