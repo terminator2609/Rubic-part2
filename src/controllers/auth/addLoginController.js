@@ -16,6 +16,10 @@ const loginToPage = async (req, res) => {
 
         const token = await allCommand.createToken(user)
 
+        res.cookie("new_token", token, {
+            httpOnly: true
+        })
+
         res.redirect("/")
 
     } catch (error) {
