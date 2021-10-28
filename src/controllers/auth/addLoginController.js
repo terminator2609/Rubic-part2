@@ -14,14 +14,14 @@ const loginToPage = async (req, res) => {
     try {
         await allCommand.checkPassword(password, user[0].password)
 
+        const token = await allCommand.createToken(user)
+
         res.redirect("/")
 
     } catch (error) {
+        console.log(error)
         res.status(404).send("Username or password no match!!!").end()
     }
-
-
-
 }
 
 router.get("/login", getLoginPage)
