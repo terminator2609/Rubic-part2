@@ -12,6 +12,7 @@ const addLoginController = require("./controllers/auth/addLoginController")
 
 const router = express.Router()
 
+
 router.use(homeController)
 router.use("/cube/create", addCubeController)
 router.use("/cube/details", detailsController)

@@ -1,5 +1,6 @@
 const addNewAccessoryService = require("../services/addAccessoryService")
 const express = require("express")
+const allCommand = require("../middleware/auth")
 
 const router = express.Router()
 
@@ -17,7 +18,7 @@ const addNewAccessory = async (req, res) => {
     }
 }
 
-router.get("/accessory", getAddAccessoryPage)
-router.post("/accessory", addNewAccessory)
+router.get("/accessory", allCommand.checkForToken, getAddAccessoryPage)
+router.post("/accessory", allCommand.checkForToken, addNewAccessory)
 
 module.exports = router

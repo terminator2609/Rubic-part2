@@ -3,6 +3,7 @@ const setDb = require("./database/database")
 const path = require("path")
 const config = require("./config/config.json")[process.env.NODE_ENV]
 const cookieParser = require("cookie-parser")
+const allCommand = require("./middleware/auth")
 
 const app = express()
 
@@ -15,6 +16,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.resolve(__dirname, "./public")))
 
 app.use(cookieParser())
+
+app.use(allCommand.verifyToken)
 
 app.use(router)
 

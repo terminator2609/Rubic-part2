@@ -1,4 +1,5 @@
 const express = require("express")
+const allCommand = require("../middleware/auth")
 
 const router = express.Router({mergeParams: true})
 
@@ -14,7 +15,7 @@ const deleteCubeFromDbAndApp = async (req, res) => {
     res.redirect("/")
 }
 
-router.get("/deleteCube", getEditPage)
-router.post("/deleteCube", deleteCubeFromDbAndApp)
+router.get("/deleteCube", allCommand.checkForToken ,getEditPage)
+router.post("/deleteCube", allCommand.checkForToken,deleteCubeFromDbAndApp)
 
 module.exports = router

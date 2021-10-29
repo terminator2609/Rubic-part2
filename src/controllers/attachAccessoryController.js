@@ -1,6 +1,7 @@
 const express = require("express")
 const allCommandCube = require("../services/addCubeService")
 const allCommandAcc = require("../services/addAccessoryService")
+const allCommand = require("../middleware/auth")
 
 const router = express.Router()
 
@@ -32,8 +33,8 @@ const attachAccToCube = async (req, res) => {
     res.redirect("/")
 }
 
-router.get("/:id", getAttachAccessoryPage)
-router.post("/:id", attachAccToCube)
+router.get("/:id", allCommand.checkForToken ,getAttachAccessoryPage)
+router.post("/:id", allCommand.checkForToken ,attachAccToCube)
 
 
 module.exports = router

@@ -1,5 +1,6 @@
 const express = require("express")
 const allCommands = require("../services/editService")
+const allCommand = require("../middleware/auth")
 
 const router = express.Router({ mergeParams: true })
 
@@ -15,8 +16,8 @@ const updateCube = async (req, res) => {
 
 }
 
-router.get("/editCube", getEditPage)
-router.post("/editCube", updateCube)
+router.get("/editCube", allCommand.checkForToken, getEditPage)
+router.post("/editCube", allCommand.checkForToken, updateCube)
 
 
 module.exports = router

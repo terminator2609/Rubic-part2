@@ -1,5 +1,6 @@
 const express = require("express")
 const addCubeService = require("../services/addCubeService")
+const allCommand = require("../middleware/auth")
 
 const router = express.Router()
 
@@ -17,7 +18,7 @@ const postDataToDb = async (req, res) => {
     }
 }
 
-router.get("/newCube", getAddCubePage)
-router.post("/newCube", postDataToDb)
+router.get("/newCube", allCommand.checkForToken ,getAddCubePage)
+router.post("/newCube", allCommand.checkForToken, postDataToDb)
 
 module.exports = router
